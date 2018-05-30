@@ -14,7 +14,7 @@ class AccountController {
     private _registerRoutes() {
 
         this.router.get('/getAccountByName', async (req, res) => {
-            const account = await this.accountService.getAccountByName(req.query.name);
+            const account = await this.accountService.getAccountByNameAsync(req.query.name);
             return res.status(200).send(account);
         });
     }

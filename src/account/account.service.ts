@@ -1,6 +1,6 @@
 import { Account } from './Account';
 import steamService from '../steam/steam.service';
-import { IAccountService, ISteamService } from '../interfaces';
+import { IAccountService, ISteamService, IAccount } from '../interfaces';
 
 class AccountService implements IAccountService {
 
@@ -10,8 +10,8 @@ class AccountService implements IAccountService {
         this.steamService = steamService;
     }
 
-    public async getAccountByName(name: string): Promise<any> {
-        const accountInfo = await this.steamService.getAccountInfoByNameAsync(name);
+    public async getAccountByNameAsync(name: string): Promise<IAccount> {
+        const accountInfo = await this.steamService.getAccountByNameAsync(name);
         return Account.fromJson(accountInfo);
     }
 

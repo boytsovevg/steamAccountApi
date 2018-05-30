@@ -1,4 +1,4 @@
-import { ISteamService } from '../interfaces';
+import { ISteamService, IAccount } from '../interfaces';
 import * as http from 'axios';
 
 const API_KEY = '7D5F2FA02FF09ACA687DE979BE355B30';
@@ -12,7 +12,7 @@ class SteamService implements ISteamService {
         this.http = http;
     }
 
-    public async getAccountInfoByNameAsync(name: string): Promise<Account> {
+    public async getAccountByNameAsync(name: string): Promise<IAccount> {
         const steamId = await this._getAccountIdByNameAsync(name);
         const response = await this.http.get(`${this.baseUrl}/ISteamUser/GetPlayerSummaries/v0002/?key=${API_KEY}&steamids=${steamId}`);
         return response.data.response.players[0];

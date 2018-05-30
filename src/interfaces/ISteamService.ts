@@ -1,3 +1,4 @@
+import { IAccount } from '.';
 export default interface ISteamService {
-    getAccountInfoByNameAsync(name: string): Promise<any>;
+    getAccountByNameAsync(name: string): Promise<IAccount>;
 }
