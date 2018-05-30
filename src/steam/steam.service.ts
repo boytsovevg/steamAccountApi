@@ -12,7 +12,7 @@ class SteamService implements ISteamService {
         this.http = http;
     }
 
-    public async getAccountInfoByNameAsync(name: string): Promise<any> {
+    public async getAccountInfoByNameAsync(name: string): Promise<Account> {
         const steamId = await this._getAccountIdByNameAsync(name);
         const response = await this.http.get(`${this.baseUrl}/ISteamUser/GetPlayerSummaries/v0002/?key=${API_KEY}&steamids=${steamId}`);
         return response.data.response.players[0];
