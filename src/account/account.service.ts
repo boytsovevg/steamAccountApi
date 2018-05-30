@@ -1,9 +1,17 @@
-import { IAccountService } from '../interfaces';
+import steamService from '../steam/steam.service';
+import { IAccountService, ISteamService } from '../interfaces';
 
 class AccountService implements IAccountService {
 
-    public getAccountByName(name: string): any {
-        throw new Error('Method not implemented.');
+    private steamService: ISteamService;
+
+    constructor() {
+        this.steamService = steamService;
+    }
+
+    public async getAccountByName(name: string): Promise<any> {
+        const accountInfo = await this.steamService.getAccountInfoByNameAsync(name);
+        return accountInfo;
     }
 
     private _getAccountGames(accountName: string): any[] {
