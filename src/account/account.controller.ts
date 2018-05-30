@@ -15,7 +15,7 @@ class AccountController {
 
         this.router.get('/getAccountByName', async (req, res) => {
             const account = await this.accountService.getAccountByName(req.body.name);
-            // return res.status(200).send(fileInfo);
+            return res.status(200).send(account);
         });
     }
 }

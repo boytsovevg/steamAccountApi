@@ -13,7 +13,7 @@ class App {
     }
 
     private _mountRoutes(): any {
-        this.express.use('/api/user', accountController);
+        this.express.use('/api/account', accountController);
     }
 
 }

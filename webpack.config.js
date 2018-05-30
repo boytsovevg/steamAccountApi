@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const paths = {
     src: path.resolve(__dirname, 'src'),
@@ -9,7 +10,7 @@ const paths = {
 module.exports = {
     context: paths.src,
     entry: {
-        app: './index.ts'
+        server: './index.ts'
     },
     output: {
         path: paths.dist,
@@ -18,7 +19,7 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js']
     },
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     module: {
         rules: [{
             test: /\.ts$/,
@@ -26,6 +27,8 @@ module.exports = {
             loader: 'awesome-typescript-loader',
         }]
     },
+    plugins: [
+        new CleanWebpackPlugin(['dist'])
+    ],
     target: 'node'
 };
-
