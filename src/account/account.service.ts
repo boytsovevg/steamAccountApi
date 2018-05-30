@@ -1,4 +1,4 @@
-import { IAccountService } from './interfaces';
+import { IAccountService } from '../interfaces';
 
 class AccountService implements IAccountService {
 
