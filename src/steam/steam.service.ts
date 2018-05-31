@@ -14,13 +14,19 @@ class SteamService implements ISteamService {
 
     public async getAccountByNameAsync(name: string): Promise<IAccount> {
         const steamId = await this._getAccountIdByNameAsync(name);
+        const games = await this.getAccountGames(steamId);
         const response = await this.http.get(`${this.baseUrl}/ISteamUser/GetPlayerSummaries/v0002/?key=${API_KEY}&steamids=${steamId}`);
         return response.data.response.players[0];
     }
 
-    private async _getAccountIdByNameAsync(name: string): Promise<string> {
+    public async getAccountGames(accountId: number): Promise<any[]> {
+        const response = await this.http.get(`${this.baseUrl}/IPlayerService/GetOwnedGames/v0001/?key=${API_KEY}&steamid=${accountId}`);
+        return response.data.response.games;
+    }
+
+    private async _getAccountIdByNameAsync(name: string): Promise<number> {
         const response = await this.http.get(`${this.baseUrl}/ISteamUser/ResolveVanityURL/v0001/?key=${API_KEY}&vanityurl=${name}`);
-        return response.data.response.steamid;
+        return parseInt(response.data.response.steamid);
     }
 }
 

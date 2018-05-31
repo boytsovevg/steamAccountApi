@@ -12,7 +12,12 @@ class AccountService implements IAccountService {
 
     public async getAccountByNameAsync(name: string): Promise<IAccount> {
         const accountInfo = await this.steamService.getAccountByNameAsync(name);
+
+        if (!accountInfo) {
+            return null;
+        }
         return Account.fromJson(accountInfo);
+
     }
 
     private _getAccountGames(accountName: string): any[] {
