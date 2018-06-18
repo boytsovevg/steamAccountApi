@@ -29,8 +29,6 @@ class SteamService implements ISteamService {
 
         return response.data.response.games;
     }
-
-
 }
 
 export default new SteamService();
