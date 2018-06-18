@@ -1,6 +1,6 @@
-import { IAvatar } from '.';
+import { IAvatar, IGame } from '.';
 
-export default interface IAccount {
+export interface IAccount {
     id: number;
     realName: string;
     nickname: string;
@@ -8,4 +8,5 @@ export default interface IAccount {
     profileUrl: string;
     avatar: IAvatar;
     clanId: number;
+    games?: Array<IGame>;
 }

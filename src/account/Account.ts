@@ -22,7 +22,8 @@ export class Account implements IAccount {
             lastLogOff: json.lastlogoff,
             profileUrl: json.profileurl,
             avatar: Account.makeAvatar(json.avatar, json.avatarmedium, json.avatarfull),
-            clanId: json.primaryclanid
+            clanId: json.primaryclanid,
+            games: json.games || []
         };
 
         return new Account(account);

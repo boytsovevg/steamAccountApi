@@ -1,6 +1,6 @@
 import { IAccount } from '.';
 
-export default interface IAccountService {
+export interface IAccountService {
 
     getAccountByNameAsync(name: string): Promise<IAccount>;
  }

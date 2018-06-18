@@ -11,17 +11,17 @@ class AccountService implements IAccountService {
     }
 
     public async getAccountByNameAsync(name: string): Promise<IAccount> {
-        const accountInfo = await this.steamService.getAccountByNameAsync(name);
+        const accountId = await this.steamService.getAccountIdByNameAsync(name);
+
+        const accountInfo = await this.steamService.getAccountAsync(accountId);
+        const games = await this.steamService.getAccountGamesAsync(accountId);
 
         if (!accountInfo) {
             return null;
         }
+        accountInfo.games = games;
+
         return Account.fromJson(accountInfo);
-
-    }
-
-    private _getAccountGames(accountName: string): any[] {
-        return [];
     }
 }
 

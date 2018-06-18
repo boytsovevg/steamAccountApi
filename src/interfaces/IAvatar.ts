@@ -1,5 +1,5 @@
-export default interface Avatar {
+export interface IAvatar {
     full: string;
-    medium: string;
+    medium?: string;
     small: string;
 }
