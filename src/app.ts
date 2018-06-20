@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import accountController from './account/account.controller';
 
 class App {
-    public express;
+    public express: express.Express;
 
     constructor() {
         this.express = express();
@@ -12,7 +12,7 @@ class App {
         this._mountRoutes();
     }
 
-    private _mountRoutes(): any {
+    private _mountRoutes(): void {
         this.express.use('/api/account', accountController);
     }
 

@@ -1,13 +1,16 @@
 import * as express from 'express';
 import { Request, Response, Router } from 'express';
 
-import { accountService, steamService, IAccountService, ISteamService } from '../services';
+import { accountService, steamService,
+    IAccountService, ISteamService } from '../services';
+
 import { Account, GameDetails } from './../models';
 
 class AccountController {
+    public router: Router = express.Router();
+
     private accountService: IAccountService;
     private steamService: ISteamService;
-    public router: Router = express.Router();
 
     constructor() {
         this.accountService = accountService;
