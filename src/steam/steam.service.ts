@@ -13,22 +13,39 @@ class SteamService implements ISteamService {
     }
 
     public async getAccountIdByNameAsync(name: string): Promise<string> {
-        const response =
-            await this.http.get(`${this.baseUrl}/ISteamUser/ResolveVanityURL/v1/?key=${API_KEY}&vanityurl=${name}`);
+        let response;
+        try {
+            response =
+                await this.http.get(`${this.baseUrl}/ISteamUser/ResolveVanityURL/v1/?key=${API_KEY}&vanityurl=${name}`);
+        } catch (error) {
+            throw new Error('steamService.getAccountIdByNameAsync ' + error);
+        }
 
         return response.data.response.steamid;
     }
 
     public async getAccountAsync(accountId: string): Promise<IAccount> {
-        const response =
-            await this.http.get(`${this.baseUrl}/ISteamUser/GetPlayerSummaries/v2/?key=${API_KEY}&steamids=${accountId}`);
+        let response;
+
+        try {
+            response =
+                await this.http.get(`${this.baseUrl}/ISteamUser/GetPlayerSummaries/v2/?key=${API_KEY}&steamids=${accountId}`);
+        } catch (error) {
+            throw new Error('steamService.getAccountAsync ' + error);
+        }
 
         return response.data.response.players[0];
     }
 
     public async getAccountGamesAsync(accountId: string): Promise<IGame[]> {
-        const response =
-            await this.http.get(`${this.baseUrl}/IPlayerService/GetOwnedGames/v1/?key=${API_KEY}&steamid=${accountId}&include_appinfo=1`);
+        let response;
+
+        try {
+            response =
+                await this.http.get(`${this.baseUrl}/IPlayerService/GetOwnedGames/v1/?key=${API_KEY}&steamid=${accountId}&include_appinfo=1`);
+        } catch (error) {
+            throw new Error('steamService.getAccountGamesAsync ' + error);
+        }
 
         return response.data.response.games;
     }
