@@ -8,4 +8,5 @@ export interface IGameDetails {
     languages: string[];
     genres: string[];
     tags: string[];
+    hasMultiplayer: boolean;
 }

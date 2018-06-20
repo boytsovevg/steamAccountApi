@@ -11,6 +11,7 @@ export class GameDetails implements IGameDetails {
     public languages: string[];
     public genres: string[];
     public tags: string[];
+    public hasMultiplayer: boolean;
 
     constructor(details: IGameDetails) {
         this.appid = details.appid;
@@ -22,6 +23,7 @@ export class GameDetails implements IGameDetails {
         this.languages = details.languages;
         this.genres = details.genres;
         this.tags = details.tags;
+        this.hasMultiplayer = details.hasMultiplayer;
     }
 
     static toViewModel(details: IGameDetailsData): IGameDetails {
@@ -31,7 +33,9 @@ export class GameDetails implements IGameDetails {
             appid: String(details.appid),
             genres: details.genre.split(', ') as string[],
             languages: details.languages.split(', ') as string[],
-            tags: Object.keys(details.tags) as string[]
+            tags: Object.keys(details.tags) as string[],
+            hasMultiplayer: Object.keys(details.tags)
+                .some(tag => tag === 'Multiplayer') as boolean
         };
 
         return new GameDetails(gameDetails);
