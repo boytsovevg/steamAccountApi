@@ -26,7 +26,7 @@ class AccountController {
             return res.status(200).send(games);
         });
 
-        this.router.get('getGameDetails', async (req: Request, res: Response) => {
+        this.router.get('/getGameDetails', async (req: Request, res: Response) => {
             const gameDetails = await this.steamService.getGameDetailsAsync(req.query.id);
 
             return res.status(200).send(gameDetails);

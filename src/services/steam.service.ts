@@ -64,7 +64,7 @@ class SteamService implements ISteamService {
     }
 
     public async getGameDetailsAsync(id: string): Promise<any> {
-        const url = 'steamspy.com/api.php?request=appdetails';
+        const url = 'http://steamspy.com/api.php?request=appdetails';
 
         let response;
 
@@ -74,7 +74,7 @@ class SteamService implements ISteamService {
             throw new Error('steamService.getGameDetailsAsync' + error);
         }
 
-        return response;
+        return response.data;
     }
 }
 
