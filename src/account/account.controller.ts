@@ -1,14 +1,15 @@
 import * as express from 'express';
 import { Request, Response, Router } from 'express';
-import accountService from './account.service';
-import { IAccountService } from '../interfaces';
+import { accountService, IAccountService, steamService, ISteamService } from '../services';
 
 class AccountController {
     private accountService: IAccountService;
+    private steamService: ISteamService;
     public router: Router = express.Router();
 
     constructor() {
         this.accountService = accountService;
+        this.steamService = steamService;
         this._registerRoutes();
     }
 
@@ -23,6 +24,12 @@ class AccountController {
             const games = await this.accountService.getAccountGamesAsync(req.query.id);
 
             return res.status(200).send(games);
+        });
+
+        this.router.get('getGameDetails', async (req: Request, res: Response) => {
+            const gameDetails = await this.steamService.getGameDetailsAsync(req.query.id);
+
+            return res.status(200).send(gameDetails);
         });
     }
 }

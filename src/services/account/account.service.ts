@@ -1,11 +1,7 @@
-import steamService from '../steam/steam.service';
+import { steamService, ISteamService, IAccountService } from '../';
 
-import { Account } from './Account';
-import { IAccount, IGame } from '../interfaces';
-
-import { IAccountService } from './IAccountService';
-import { ISteamService } from './../steam/ISteamService';
-
+import { IAccount, IGame } from '../../interfaces';
+import { Account } from '../../models';
 
 class AccountService implements IAccountService {
 
@@ -39,4 +35,4 @@ class AccountService implements IAccountService {
     }
 }
 
-export default new AccountService();
+export const accountService = new AccountService();

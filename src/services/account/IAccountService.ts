@@ -1,4 +1,4 @@
-import { IAccount, IGame } from '../interfaces';
+import { IAccount, IGame } from '../../interfaces';
 
 export interface IAccountService {
     getAccountByNameAsync(name: string): Promise<IAccount>;
