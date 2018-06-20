@@ -28,6 +28,8 @@ export class GameDetails implements IGameDetails {
 
     static toViewModel(details: IGameDetailsData): IGameDetails {
 
+        const MULTIPLAYER = 'Multiplayer';
+
         const gameDetails = {
             ...details,
             appid: String(details.appid),
@@ -35,7 +37,7 @@ export class GameDetails implements IGameDetails {
             languages: details.languages.split(', ') as string[],
             tags: Object.keys(details.tags) as string[],
             hasMultiplayer: Object.keys(details.tags)
-                .some(tag => tag === 'Multiplayer') as boolean
+                .some(tag => tag === MULTIPLAYER) as boolean
         };
 
         return new GameDetails(gameDetails);

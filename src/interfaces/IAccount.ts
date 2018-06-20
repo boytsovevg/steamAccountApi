@@ -1,4 +1,4 @@
-import { IAvatar, IGame } from '.';
+import { IAvatar } from '.';
 
 export interface IAccount {
     id: number;
@@ -8,5 +8,4 @@ export interface IAccount {
     profileUrl: string;
     avatar: IAvatar;
     clanId: number;
-    games?: Array<IGame>;
 }

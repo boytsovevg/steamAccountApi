@@ -1,7 +1,7 @@
-import { steamService, ISteamService, IAccountService } from '.';
+import { steamService } from './steam.service';
+import { ISteamService, IAccountService } from './interfaces';
 
-import { IAccount, IGame } from '../interfaces';
-import { Account } from '../models';
+import { IAccountData, IGame } from '../interfaces';
 
 class AccountService implements IAccountService {
 
@@ -11,7 +11,7 @@ class AccountService implements IAccountService {
         this.steamService = steamService;
     }
 
-    public async getAccountByNameAsync(name: string): Promise<IAccount> {
+    public async getAccountByNameAsync(name: string): Promise<IAccountData> {
 
         const accountId = await this.steamService.getAccountIdByNameAsync(name);
         const accountInfo = await this.steamService.getAccountAsync(accountId);
@@ -20,7 +20,7 @@ class AccountService implements IAccountService {
             return null;
         }
 
-        return Account.fromJson(accountInfo);
+        return accountInfo;
     }
 
     public async getAccountGamesAsync(id: string): Promise<IGame[]> {

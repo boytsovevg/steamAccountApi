@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Request, Response, Router } from 'express';
 
 import { accountService, steamService, IAccountService, ISteamService } from '../services';
-import { GameDetails } from './../models';
+import { Account, GameDetails } from './../models';
 
 class AccountController {
     private accountService: IAccountService;
@@ -18,8 +18,8 @@ class AccountController {
     private _registerRoutes() {
 
         this.router.get('/getAccountByName', async (req: Request, res: Response) => {
-            const account = await this.accountService.getAccountByNameAsync(req.query.name);
-            return res.status(200).send(account);
+            const accountData = await this.accountService.getAccountByNameAsync(req.query.name);
+            return res.status(200).send(Account.toViewModel(accountData));
         });
 
         this.router.get('/getAccountGames', async (req: Request, res: Response) => {
@@ -28,10 +28,16 @@ class AccountController {
             return res.status(200).send(games);
         });
 
-        this.router.get('/getGameDetails', async (req: Request, res: Response) => {
-            const gameDetails = await this.steamService.getGameDetailsAsync(req.query.id);
+        this.router.get('/getGameInfo', async (req: Request, res: Response) => {
+            const gameInfo = await this.steamService.getGameInfoAsync(req.query.id);
 
-            return res.status(200).send(GameDetails.toViewModel(gameDetails));
+            return res.status(200).send(gameInfo);
+        });
+
+        this.router.get('/getGameDetails', async (req: Request, res: Response) => {
+            const gameDetailsData = await this.steamService.getGameDetailsAsync(req.query.id);
+
+            return res.status(200).send(GameDetails.toViewModel(gameDetailsData));
         });
     }
 }

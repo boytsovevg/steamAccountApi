@@ -1,4 +1,5 @@
 export * from './IAccount';
+export * from './IAccount.data';
 export * from './IAchievement';
 export * from './IAvatar';
 export * from './IGame';

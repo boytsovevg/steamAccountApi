@@ -1,5 +1,5 @@
 import * as http from 'axios';
-import { IAccount, IGame, IGameInfo, IGameDetailsData } from '../interfaces';
+import { IAccountData, IGame, IGameInfo, IGameDetailsData } from '../interfaces';
 import { ISteamService } from './interfaces';
 
 const API_KEY = '7D5F2FA02FF09ACA687DE979BE355B30';
@@ -15,6 +15,7 @@ class SteamService implements ISteamService {
 
     public async getAccountIdByNameAsync(name: string): Promise<string> {
         let response;
+
         try {
             response =
                 await this.http.get(`${this.baseUrl}/ISteamUser/ResolveVanityURL/v1/?key=${API_KEY}&vanityurl=${name}`);
@@ -25,7 +26,7 @@ class SteamService implements ISteamService {
         return response.data.response.steamid;
     }
 
-    public async getAccountAsync(accountId: string): Promise<IAccount> {
+    public async getAccountAsync(accountId: string): Promise<IAccountData> {
         let response;
 
         try {
@@ -60,7 +61,7 @@ class SteamService implements ISteamService {
             throw new Error('steamService.getGameInfoAsync ' + error);
         }
 
-        return response.data.response.game;
+        return response.data.game;
     }
 
     public async getGameDetailsAsync(id: string): Promise<IGameDetailsData> {
