@@ -1,4 +1,4 @@
-export * from './account/account.service';
-export * from './steam/steam.service';
+export * from './account.service';
+export * from './steam.service';
 
 export * from './interfaces';

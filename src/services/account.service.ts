@@ -1,7 +1,7 @@
-import { steamService, ISteamService, IAccountService } from '../';
+import { steamService, ISteamService, IAccountService } from '.';
 
-import { IAccount, IGame } from '../../interfaces';
-import { Account } from '../../models';
+import { IAccount, IGame } from '../interfaces';
+import { Account } from '../models';
 
 class AccountService implements IAccountService {
 

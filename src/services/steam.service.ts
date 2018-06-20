@@ -1,6 +1,6 @@
 import * as http from 'axios';
-import { IAccount, IGame, IGameInfo } from '../../interfaces';
-import { ISteamService } from './ISteamService';
+import { IAccount, IGame, IGameInfo } from '../interfaces';
+import { ISteamService } from './interfaces';
 
 const API_KEY = '7D5F2FA02FF09ACA687DE979BE355B30';
 

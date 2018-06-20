@@ -1,2 +1,2 @@
-export * from '../account/IAccountService';
-export * from '../steam/ISteamService';
+export * from './IAccountService';
+export * from './ISteamService';

@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Request, Response, Router } from 'express';
-import { accountService, IAccountService, steamService, ISteamService } from '../services';
+import { accountService, steamService, IAccountService, ISteamService } from '../services';
 
 class AccountController {
     private accountService: IAccountService;
