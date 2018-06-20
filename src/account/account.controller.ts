@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { Request, Response, Router } from 'express';
+
 import { accountService, steamService, IAccountService, ISteamService } from '../services';
+import { GameDetails } from './../models';
 
 class AccountController {
     private accountService: IAccountService;
@@ -29,7 +31,7 @@ class AccountController {
         this.router.get('/getGameDetails', async (req: Request, res: Response) => {
             const gameDetails = await this.steamService.getGameDetailsAsync(req.query.id);
 
-            return res.status(200).send(gameDetails);
+            return res.status(200).send(GameDetails.toViewModel(gameDetails));
         });
     }
 }

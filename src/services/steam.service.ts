@@ -1,5 +1,5 @@
 import * as http from 'axios';
-import { IAccount, IGame, IGameInfo } from '../interfaces';
+import { IAccount, IGame, IGameInfo, IGameDetailsData } from '../interfaces';
 import { ISteamService } from './interfaces';
 
 const API_KEY = '7D5F2FA02FF09ACA687DE979BE355B30';
@@ -63,7 +63,7 @@ class SteamService implements ISteamService {
         return response.data.response.game;
     }
 
-    public async getGameDetailsAsync(id: string): Promise<any> {
+    public async getGameDetailsAsync(id: string): Promise<IGameDetailsData> {
         const url = 'http://steamspy.com/api.php?request=appdetails';
 
         let response;
