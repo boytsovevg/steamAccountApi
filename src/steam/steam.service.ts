@@ -1,5 +1,6 @@
-import { ISteamService, IAccount, IGame } from '../interfaces';
 import * as http from 'axios';
+import { IAccount, IGame, IGameInfo } from '../interfaces';
+import { ISteamService } from './ISteamService';
 
 const API_KEY = '7D5F2FA02FF09ACA687DE979BE355B30';
 
@@ -48,6 +49,18 @@ class SteamService implements ISteamService {
         }
 
         return response.data.response.games;
+    }
+
+    public async getGameInfo(id: string): Promise<IGameInfo> {
+        let response;
+
+        try {
+            response = await this.http.get(`${this.baseUrl}/ISteamUserStats/GetSchemaForGame/v2/?key=${API_KEY}&appid=${id}`);
+        } catch (error) {
+            throw new Error('steamService.getGameInfo ' + error);
+        }
+
+        return response.data.response.game;
     }
 }
 
