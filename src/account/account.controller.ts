@@ -18,6 +18,12 @@ class AccountController {
         this._registerRoutes();
     }
 
+    private static handleError(error: Error, res: Response): void {
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(error));
+    }
+
     private _registerRoutes() {
 
         this.router.get('/getAccountByName', async (req: Request, res: Response) => {
@@ -25,15 +31,16 @@ class AccountController {
 
             try {
                 accountData = await this.accountService.getAccountByNameAsync(req.query.name);
+                throw new Error();
             } catch (error) {
-                return res.status(500).send(error);
+                return AccountController.handleError(error, res);
             }
 
             if (!accountData) {
-                return res.status(200).send(null);
+                return res.status(200).json(null);
             }
 
-            return res.status(200).send(Account.toViewModel(accountData));
+            return res.status(200).json(Account.toViewModel(accountData));
         });
 
         this.router.get('/getAccountGames', async (req: Request, res: Response) => {
@@ -42,10 +49,10 @@ class AccountController {
             try {
                 games = await this.accountService.getAccountGamesAsync(req.query.id);
             } catch (error) {
-                return res.status(500).send(error);
+                return AccountController.handleError(error, res);
             }
 
-            return res.status(200).send(games);
+            return res.status(200).json(games);
         });
 
         this.router.get('/getGameInfo', async (req: Request, res: Response) => {
@@ -54,10 +61,10 @@ class AccountController {
             try {
                 gameInfo = await this.steamService.getGameInfoAsync(req.query.id);
             } catch (error) {
-                return res.status(500).send(error);
+                return AccountController.handleError(error, res);
             }
 
-            return res.status(200).send(gameInfo);
+            return res.status(200).json(gameInfo);
         });
 
         this.router.get('/getGameDetails', async (req: Request, res: Response) => {
@@ -66,10 +73,10 @@ class AccountController {
             try {
                 gameDetailsData = await this.steamService.getGameDetailsAsync(req.query.id);
             } catch (error) {
-                res.status(500).send(error);
+                return AccountController.handleError(error, res);
             }
 
-            return res.status(200).send(GameDetails.toViewModel(gameDetailsData));
+            return res.status(200).json(GameDetails.toViewModel(gameDetailsData));
         });
     }
 }
