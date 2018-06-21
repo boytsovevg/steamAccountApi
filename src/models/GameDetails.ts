@@ -33,8 +33,8 @@ export class GameDetails implements IGameDetails {
         const gameDetails = {
             ...details,
             id: details.appid,
-            genres: details.genre.split(', ') as string[],
-            languages: details.languages.split(', ') as string[],
+            genres: details.genre && details.genre.split(', ') as string[] || [],
+            languages: details.languages && details.languages.split(', ') as string[] || [],
             tags: Object.keys(details.tags) as string[],
             hasMultiplayer: Object.keys(details.tags)
                 .some(tag => tag === MULTIPLAYER) as boolean
