@@ -65,19 +65,8 @@ class AccountController {
 
             return res.status(200).json(gameInfo);
         });
-
-        this.router.get('/getGameDetails', async (req: Request, res: Response) => {
-            let gameDetailsData;
-
-            try {
-                gameDetailsData = await this.steamService.getGameDetailsAsync(req.query.id);
-            } catch (error) {
-                return AccountController.handleError(error, res);
-            }
-
-            return res.status(200).json(GameDetails.toViewModel(gameDetailsData));
-        });
     }
+
 }
 
-export default new AccountController().router;
+export const accountController = new AccountController().router;
