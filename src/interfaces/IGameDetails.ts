@@ -1,5 +1,5 @@
 export interface IGameDetails {
-    appid: string;
+    id: number;
     name: string;
     developer: string;
     publisher: string;
