@@ -4,7 +4,7 @@ import { Request, Response, Router } from 'express';
 import { accountService, steamService,
     IAccountService, ISteamService } from '../services';
 
-import { Account, GameDetails } from './../models';
+import { Account, Game, GameDetails } from './../models';
 
 class AccountController {
     public router: Router = express.Router();
@@ -51,7 +51,7 @@ class AccountController {
                 return AccountController.handleError(error, res);
             }
 
-            return res.status(200).json(games);
+            return res.status(200).json(games.map(game => Game.toViewModel(game)));
         });
 
         this.router.get('/getGameInfo', async (req: Request, res: Response) => {
