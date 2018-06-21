@@ -31,7 +31,6 @@ class AccountController {
 
             try {
                 accountData = await this.accountService.getAccountByNameAsync(req.query.name);
-                throw new Error();
             } catch (error) {
                 return AccountController.handleError(error, res);
             }
