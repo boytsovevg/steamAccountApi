@@ -1,19 +1,22 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import accountController from './account/account.controller';
+
+import { accountController, gamesController } from './controllers';
 
 class App {
-    public express;
+    public express: express.Express;
 
     constructor() {
         this.express = express();
         this.express.use(bodyParser.urlencoded({ extended: true }));
         this.express.use(bodyParser.json());
+
         this._mountRoutes();
     }
 
-    private _mountRoutes(): any {
+    private _mountRoutes(): void {
         this.express.use('/api/account', accountController);
+        this.express.use('/api/games', gamesController);
     }
 
 }
